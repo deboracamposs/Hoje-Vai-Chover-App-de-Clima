@@ -1,0 +1,16 @@
+{
+  "name": "Generation Brasil — App de Clima",
+  "short_name": "Clima BR",
+  "description": "Previsão do tempo em qualquer cidade do mundo.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1565C0",
+  "theme_color": "#1E88E5",
+  "icons": [
+    {
+      "src": "/public/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}

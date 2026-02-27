@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="App de Clima – Generation Brasil. Previsão do tempo em qualquer cidade do mundo." />
+    <title>Clima</title>
+    <link rel="icon" href="https://images.all-free-download.com/images/graphicwebp/cloud_sun_weather_forecast_sign_flat_black_white_outline_6923332.webp" type="image/webp">
+</head>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <!-- App styles -->
+  <link rel="stylesheet" href="assets/css/reset.css" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+
+  <!-- Leaflet ripple animation for map marker -->
+  <style>
+    @keyframes rippleMap {
+      0%   { transform: scale(1); opacity: 1; }
+      100% { transform: scale(2.5); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body class="theme-sunny">
+
+  <!-- Atmospheric particle canvas -->
+  <canvas id="atmosphere-canvas" aria-hidden="true"></canvas>
+
+  <div class="app-wrapper">
+
+    <!-- ── HEADER ── -->
+    <header class="header">
+      <div class="logo">
+        <div class="logo-icon-wrap">
+          <div class="glow"></div>
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="32" cy="32" r="14" fill="#FFD54F"/>
+            <circle cx="32" cy="32" r="10" fill="#FFEB3B"/>
+            <line x1="32" y1="5" x2="32" y2="16" stroke="#FFA000" stroke-width="4.5" stroke-linecap="round"/>
+            <line x1="32" y1="48" x2="32" y2="59" stroke="#FFA000" stroke-width="4.5" stroke-linecap="round"/>
+            <line x1="5" y1="32" x2="16" y2="32" stroke="#FFA000" stroke-width="4.5" stroke-linecap="round"/>
+            <line x1="48" y1="32" x2="59" y2="32" stroke="#FFA000" stroke-width="4.5" stroke-linecap="round"/>
+            <line x1="12.8" y1="12.8" x2="20.5" y2="20.5" stroke="#FFA000" stroke-width="4" stroke-linecap="round"/>
+            <line x1="43.5" y1="43.5" x2="51.2" y2="51.2" stroke="#FFA000" stroke-width="4" stroke-linecap="round"/>
+            <line x1="51.2" y1="12.8" x2="43.5" y2="20.5" stroke="#FFA000" stroke-width="4" stroke-linecap="round"/>
+            <line x1="20.5" y1="43.5" x2="12.8" y2="51.2" stroke="#FFA000" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <h1>Generation Brasil</h1>
+          <p>App de Clima</p>
+        </div>
+      </div>
+
+      <div class="unit-toggle" role="group" aria-label="Unidade de temperatura">
+        <button id="btn-c" class="active" onclick="toggleUnit('C')" aria-label="Celsius">°C</button>
+        <button id="btn-f" onclick="toggleUnit('F')" aria-label="Fahrenheit">°F</button>
+      </div>
+    </header>
+
+    <!-- ── SEARCH ── -->
+    <section class="search-section" aria-label="Busca de cidades">
+      <div class="search-row">
+        <div class="search-field">
+          <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input
+            id="city-input"
+            type="text"
+            placeholder="Buscar cidade… Ex: São Paulo, Tokyo, Londres"
+            autocomplete="off"
+            aria-label="Nome da cidade"
+            aria-autocomplete="list"
+          />
+          <!-- Suggestions dropdown -->
+          <div id="suggestions" class="suggestions-dropdown" role="listbox" aria-label="Sugestões de cidades"></div>
+        </div>
+
+        <button class="btn btn-primary" onclick="searchFromInput()" aria-label="Buscar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          Buscar
+        </button>
+
+        <button class="btn btn-glass" onclick="useLocation()" aria-label="Usar minha localização">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+            <circle cx="12" cy="9" r="2.5"/>
+          </svg>
+          Minha localização
+        </button>
+      </div>
+
+      <!-- History pills -->
+      <div id="history-row" class="history-row" role="list" aria-label="Cidades recentes"></div>
+    </section>
+
+    <!-- ── WEATHER CONTENT (replaced by JS) ── -->
+    <div id="weather-content" role="main"></div>
+
+  </div><!-- /app-wrapper -->
+
+  <!-- Toast notification -->
+  <div id="toast" role="alert" aria-live="assertive"></div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- App JS (modules) -->
+  <script type="module" src="assets/js/main.js"></script>
+
+</body>
+</html>
