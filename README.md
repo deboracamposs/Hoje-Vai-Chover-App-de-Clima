@@ -39,10 +39,8 @@ O **Hoje Vai Chover** é uma aplicação web intuitiva desenvolvida para fornece
 
 ## 🛠️ Melhorias Futuras
 
-- [ ] Adicionar previsão para os próximos 5 dias.
-- [ ] Implementar histórico de buscas recentes.
-- [ ] Alterar o plano de fundo dinamicamente com base no clima (ex: fundo de chuva quando estiver chovendo).
 - [ ] Adicionar suporte a múltiplos idiomas.
+- [ ] Adicionar tema escuro, para conforto da visão.
 
 ---
 
